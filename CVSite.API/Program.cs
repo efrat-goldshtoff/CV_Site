@@ -1,11 +1,17 @@
+using CVSite.SERVICE;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//builder.Services.Configure<GitHubOptions>(builder.Configuration.GetSection(nameof(GitHubOptions)));
+builder.Services.AddGitHubIntegration(options => builder.Configuration.GetSection(nameof(GitHubOptions)).Bind(options));
 
 var app = builder.Build();
 
